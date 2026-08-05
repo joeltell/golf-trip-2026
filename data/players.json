@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Joel",
+    "photo": "images/player-placeholder.svg",
+    "bio": "Trip organizer. Plays off a self-reported handicap that nobody has ever verified.",
+    "quirk": "Will not stop talking about his new driver."
+  },
+  {
+    "name": "Example Friend",
+    "photo": "images/player-placeholder.svg",
+    "bio": "Add a short bio here.",
+    "quirk": "Add a fun fact or running joke here."
+  }
+]

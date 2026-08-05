@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Example Golf Club",
+    "location": "Somewhere, Country",
+    "roundDate": "2026-09-12",
+    "photo": "images/course-placeholder.svg",
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "notes": "Dogleg right, watch the bunker on the left.",
+        "youtubeId": "REPLACE_WITH_YOUTUBE_ID"
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "notes": "Short iron, water hazard front of green.",
+        "youtubeId": ""
+      }
+    ]
+  }
+]

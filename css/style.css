@@ -1,0 +1,199 @@
+:root {
+  --green-dark: #1b4332;
+  --green: #2d6a4f;
+  --green-light: #74c69d;
+  --cream: #f8f7f2;
+  --text: #1c1c1c;
+  --muted: #6b7280;
+  --white: #ffffff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+header.site-header {
+  background: var(--green-dark);
+  color: var(--white);
+  padding: 1.5rem 1rem 1rem;
+  text-align: center;
+}
+
+header.site-header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+header.site-header p {
+  margin: 0;
+  color: var(--green-light);
+  font-size: 0.95rem;
+}
+
+nav.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--green);
+  padding: 0.6rem;
+}
+
+nav.main-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+nav.main-nav a:hover,
+nav.main-nav a.active {
+  background: var(--green-dark);
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+h2 {
+  color: var(--green-dark);
+  border-bottom: 2px solid var(--green-light);
+  padding-bottom: 0.4rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.player-card {
+  text-align: center;
+}
+
+.player-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+  border: 3px solid var(--green-light);
+}
+
+.player-card h3 {
+  margin: 0.25rem 0;
+  color: var(--green-dark);
+}
+
+.player-card .quirk {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.hole-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.hole {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+
+.hole h4 {
+  margin: 0 0 0.5rem;
+  color: var(--green-dark);
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+table.leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+table.leaderboard th,
+table.leaderboard td {
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+table.leaderboard th {
+  background: var(--green);
+  color: var(--white);
+}
+
+table.leaderboard tr:last-child td {
+  border-bottom: none;
+}
+
+table.leaderboard tr:nth-child(even) td {
+  background: #f2f8f4;
+}
+
+.itinerary-day {
+  margin-bottom: 1.2rem;
+}
+
+.itinerary-day h3 {
+  color: var(--green-dark);
+  margin-bottom: 0.3rem;
+}
+
+.itinerary-day ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 1rem;
+}
