@@ -1,22 +1,58 @@
 [
   {
-    "name": "Example Golf Club",
-    "location": "Somewhere, Country",
+    "name": "Sand GCC",
+    "location": "Jönköping, Sweden",
+    "roundDate": "2026-08-17",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
+  },
+  {
+    "name": "Jönköpings GK",
+    "location": "Jönköping, Sweden",
     "roundDate": "2026-08-18",
     "photo": "images/course-placeholder.svg",
-    "holes": [
-      {
-        "number": 1,
-        "par": 4,
-        "notes": "Dogleg right, watch the bunker on the left.",
-        "youtubeId": "REPLACE_WITH_YOUTUBE_ID"
-      },
-      {
-        "number": 2,
-        "par": 3,
-        "notes": "Short iron, water hazard front of green.",
-        "youtubeId": ""
-      }
-    ]
+    "holes": []
+  },
+  {
+    "name": "Skinnarebo GCC",
+    "location": "Jönköping, Sweden",
+    "roundDate": "2026-08-18",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
+  },
+  {
+    "name": "Billingens GK",
+    "location": "Skövde, Sweden",
+    "roundDate": "2026-08-19",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
+  },
+  {
+    "name": "Lidköping GK",
+    "location": "Lidköping, Sweden",
+    "roundDate": "2026-08-20",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
+  },
+  {
+    "name": "Skövde GK - Södra banan",
+    "location": "Skövde, Sweden",
+    "roundDate": "2026-08-21",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
+  },
+  {
+    "name": "Vara-Bjärtorp Golfklubb",
+    "location": "Vara, Sweden",
+    "roundDate": "2026-08-21",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
+  },
+  {
+    "name": "Forsbacka Golfklubb",
+    "location": "Åmål, Sweden",
+    "roundDate": "2026-08-22",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
   }
 ]

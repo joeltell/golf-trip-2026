@@ -1,12 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500&display=swap");
+
 :root {
-  --green-dark: #1b4332;
-  --green: #2d6a4f;
-  --green-light: #74c69d;
-  --cream: #f8f7f2;
-  --text: #1c1c1c;
-  --muted: #6b7280;
+  /* Palette borrowed from hagstromska.se */
+  --deep: #07443d;
+  --deep-900: #042b26;
+  --lime: #d2ff00;
+  --lime-dark: #accf05;
+  --sand: #eceae1;
+  --ink: #202024;
+  --muted: #58585b;
   --white: #ffffff;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --focus: #00fdff;
+
+  --wash: linear-gradient(117deg, #d2ff00 1%, #eceae1 44%);
+
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --shadow: 0 1px 2px rgba(7, 68, 61, 0.06), 0 8px 24px rgba(7, 68, 61, 0.07);
+  --radius: 20px;
 }
 
 * {
@@ -15,128 +27,250 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--cream);
-  color: var(--text);
-  line-height: 1.5;
+  font-family: var(--sans);
+  font-weight: 300;
+  background: var(--sand);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Header ---------- */
+
 header.site-header {
-  background: var(--green-dark);
+  position: relative;
+  background: var(--deep);
   color: var(--white);
-  padding: 1.5rem 1rem 1rem;
+  padding: 3.5rem 1.25rem 3rem;
   text-align: center;
+  overflow: hidden;
+}
+
+header.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--lime);
 }
 
 header.site-header h1 {
-  margin: 0 0 0.25rem;
-  font-size: 1.6rem;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 7vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
 }
 
 header.site-header p {
   margin: 0;
-  color: var(--green-light);
-  font-size: 0.95rem;
+  color: var(--lime);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
+
+/* ---------- Nav ---------- */
 
 nav.main-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem;
-  background: var(--green);
-  padding: 0.6rem;
+  gap: 0.35rem;
+  background: var(--deep);
+  padding: 0 0.75rem 1.5rem;
 }
 
 nav.main-nav a {
   color: var(--white);
   text-decoration: none;
   font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  transition: background 0.15s;
+  font-weight: 400;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
-nav.main-nav a:hover,
-nav.main-nav a.active {
-  background: var(--green-dark);
+nav.main-nav a:hover {
+  border-color: var(--lime);
+  color: var(--lime);
 }
+
+nav.main-nav a.active {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--deep);
+  font-weight: 500;
+}
+
+nav.main-nav a.active:hover {
+  background: var(--lime-dark);
+  border-color: var(--lime-dark);
+  color: var(--deep);
+}
+
+/* ---------- Layout ---------- */
 
 main {
-  max-width: 900px;
+  max-width: 940px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
+  padding: 3rem 1.25rem 4rem;
 }
 
 h2 {
-  color: var(--green-dark);
-  border-bottom: 2px solid var(--green-light);
-  padding-bottom: 0.4rem;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  color: var(--deep);
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(7, 68, 61, 0.15);
+  position: relative;
 }
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 3.5rem;
+  height: 3px;
+  background: var(--lime);
+}
+
+h3 {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--deep);
+  text-decoration-color: var(--lime-dark);
+  text-underline-offset: 3px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Cards ---------- */
 
 .card {
   background: var(--white);
-  border-radius: 10px;
+  border: 1px solid rgba(7, 68, 61, 0.08);
+  border-radius: var(--radius) var(--radius) var(--radius) 0;
   box-shadow: var(--shadow);
-  padding: 1.2rem;
-  margin-bottom: 1.5rem;
+  padding: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.card-grid .card {
+  margin-bottom: 0;
 }
 
 .player-card {
   text-align: center;
+  padding: 2rem 1.5rem;
 }
 
 .player-card img {
-  width: 120px;
-  height: 120px;
+  width: 124px;
+  height: 124px;
   object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 0.75rem;
-  border: 3px solid var(--green-light);
+  margin-bottom: 1rem;
+  border: 3px solid var(--lime);
+  background: var(--sand);
 }
 
 .player-card h3 {
-  margin: 0.25rem 0;
-  color: var(--green-dark);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  color: var(--deep);
+  margin: 0 0 0.5rem;
 }
 
 .player-card .quirk {
-  font-style: italic;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+}
+
+/* ---------- Courses ---------- */
+
+.course-photo {
+  width: 100%;
+  border-radius: 14px 14px 14px 0;
+  margin-bottom: 1.25rem;
+  background: var(--sand);
 }
 
 .hole-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .hole {
-  background: var(--cream);
-  border-radius: 8px;
-  padding: 0.8rem;
+  background: var(--wash);
+  border-radius: 14px 14px 14px 0;
+  padding: 1.1rem 1.2rem;
 }
 
 .hole h4 {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--deep);
   margin: 0 0 0.5rem;
-  color: var(--green-dark);
+}
+
+.hole p {
+  font-size: 0.95rem;
 }
 
 .video-embed {
   position: relative;
   width: 100%;
   padding-top: 56.25%;
-  border-radius: 6px;
+  border-radius: 10px;
   overflow: hidden;
-  margin-top: 0.5rem;
+  margin-top: 0.85rem;
 }
 
 .video-embed iframe {
@@ -148,25 +282,48 @@ h2 {
   border: 0;
 }
 
+/* ---------- Leaderboard ---------- */
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 table.leaderboard {
   width: 100%;
+  min-width: 640px;
   border-collapse: collapse;
   background: var(--white);
-  border-radius: 10px;
+  border-radius: 14px 14px 14px 0;
   overflow: hidden;
-  box-shadow: var(--shadow);
+  border: 1px solid rgba(7, 68, 61, 0.1);
 }
 
 table.leaderboard th,
 table.leaderboard td {
-  padding: 0.7rem 0.9rem;
+  padding: 0.85rem 1rem;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(7, 68, 61, 0.08);
 }
 
 table.leaderboard th {
-  background: var(--green);
-  color: var(--white);
+  background: var(--deep);
+  color: var(--lime);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+table.leaderboard th abbr {
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(210, 255, 0, 0.6);
+  cursor: help;
+}
+
+table.leaderboard td:first-child {
+  font-weight: 500;
+  color: var(--deep);
 }
 
 table.leaderboard tr:last-child td {
@@ -174,26 +331,82 @@ table.leaderboard tr:last-child td {
 }
 
 table.leaderboard tr:nth-child(even) td {
-  background: #f2f8f4;
+  background: rgba(236, 234, 225, 0.55);
 }
 
+/* ---------- Itinerary ---------- */
+
 .itinerary-day {
-  margin-bottom: 1.2rem;
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.itinerary-day::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  bottom: 0.15rem;
+  width: 3px;
+  background: var(--lime);
+}
+
+.itinerary-day:last-of-type {
+  margin-bottom: 1rem;
 }
 
 .itinerary-day h3 {
-  color: var(--green-dark);
-  margin-bottom: 0.3rem;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--deep);
+  margin: 0 0 0.4rem;
 }
 
 .itinerary-day ul {
   margin: 0;
-  padding-left: 1.2rem;
+  padding-left: 1.1rem;
+  list-style: none;
 }
 
+.itinerary-day li {
+  position: relative;
+}
+
+.itinerary-day li::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  top: 0.75em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--deep);
+}
+
+/* ---------- Footer ---------- */
+
 footer {
+  background: var(--deep-900);
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
-  color: var(--muted);
   font-size: 0.8rem;
-  padding: 1rem;
+  letter-spacing: 0.06em;
+  padding: 2rem 1rem;
+}
+
+@media (max-width: 600px) {
+  header.site-header {
+    padding: 2.5rem 1rem 2rem;
+  }
+
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  main {
+    padding: 2rem 1rem 3rem;
+  }
 }

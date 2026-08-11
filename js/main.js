@@ -34,7 +34,7 @@ async function renderCourses() {
     .map(
       (course) => `
       <div class="card">
-        <img src="${escapeHtml(course.photo)}" alt="${escapeHtml(course.name)}" style="width:100%; border-radius:8px; margin-bottom:0.75rem;">
+        <img src="${escapeHtml(course.photo)}" alt="${escapeHtml(course.name)}" class="course-photo">
         <h2 style="margin-top:0;">${escapeHtml(course.name)}</h2>
         <p>${escapeHtml(course.location)} &middot; ${escapeHtml(course.roundDate)}</p>
         <div class="hole-list">
@@ -50,7 +50,7 @@ async function renderCourses() {
                        <iframe src="https://www.youtube.com/embed/${escapeHtml(hole.youtubeId)}"
                          allowfullscreen loading="lazy"></iframe>
                      </div>`
-                  : `<p style="color:#999; font-size:0.85rem;">No video yet</p>`
+                  : `<p class="note">No video yet</p>`
               }
             </div>
           `

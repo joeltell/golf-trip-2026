@@ -6,9 +6,15 @@
     "quirk": "Will not stop talking about his new driver."
   },
   {
-    "name": "Example Friend",
+    "name": "Niklas",
     "photo": "images/player-placeholder.svg",
-    "bio": "Add a short bio here.",
-    "quirk": "Add a fun fact or running joke here."
+    "bio": "Lives out in the countryside with two cats, both of whom have watched more of his practice swings than any human ever will.",
+    "quirk": "Insists the fresh country air is worth twenty extra yards."
+  },
+  {
+    "name": "Jacob",
+    "photo": "images/player-placeholder.svg",
+    "bio": "Girl-dad who gets paid to play video games at work, and maintains that this is legitimate training for reading greens.",
+    "quirk": "Counts respawning as a free drop."
   }
 ]
