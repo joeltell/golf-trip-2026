@@ -4,6 +4,50 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// Accepts a bare 11-char ID or any YouTube URL pasted straight from the browser.
+// Returns "" for empty values and the old placeholder, so callers can fall back.
+function youtubeId(raw) {
+  const s = String(raw ?? "").trim();
+  if (!s || s === "REPLACE_WITH_YOUTUBE_ID") return "";
+  const fromUrl = s.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/)([\w-]{11})/);
+  if (fromUrl) return fromUrl[1];
+  return /^[\w-]{11}$/.test(s) ? s : "";
+}
+
+function videoEmbed(raw, title) {
+  const id = youtubeId(raw);
+  if (!id) return "";
+  return `<div class="video-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/${id}"
+              title="${escapeHtml(title ?? "Clip")}"
+              allowfullscreen loading="lazy"></iframe>
+          </div>`;
+}
+
+async function renderClips() {
+  const container = document.getElementById("clips");
+  if (!container) return;
+
+  const { clips } = await fetch("data/clips.json").then((r) => r.json());
+
+  container.innerHTML = clips
+    .map((c) => {
+      const embed = videoEmbed(c.youtubeId, c.title);
+      const local = c.file
+        ? `<video controls preload="metadata" playsinline>
+             <source src="${escapeHtml(c.file)}" type="video/mp4">
+             Your browser can't play this clip.
+           </video>`
+        : `<p class="note">No clip yet</p>`;
+      return `
+      <figure class="clip">
+        ${embed || local}
+        ${c.title ? `<figcaption>${escapeHtml(c.title)}</figcaption>` : ""}
+      </figure>`;
+    })
+    .join("");
+}
+
 async function renderPlayers() {
   const container = document.getElementById("players");
   if (!container) return;
@@ -45,12 +89,8 @@ async function renderCourses() {
               <h4>Hole ${hole.number} &middot; Par ${hole.par}</h4>
               <p>${escapeHtml(hole.notes)}</p>
               ${
-                hole.youtubeId && hole.youtubeId !== "REPLACE_WITH_YOUTUBE_ID"
-                  ? `<div class="video-embed">
-                       <iframe src="https://www.youtube.com/embed/${escapeHtml(hole.youtubeId)}"
-                         allowfullscreen loading="lazy"></iframe>
-                     </div>`
-                  : `<p class="note">No video yet</p>`
+                videoEmbed(hole.youtubeId, `${course.name} — hole ${hole.number}`) ||
+                `<p class="note">No video yet</p>`
               }
             </div>
           `
@@ -160,6 +200,7 @@ async function renderLeaderboard() {
   }
 }
 
+renderClips();
 renderPlayers();
 renderCourses();
 renderLeaderboard();

@@ -205,18 +205,38 @@ code {
 
 .clip-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin-top: 1.25rem;
+  align-items: start;
 }
 
-.clip-grid video {
+.clip {
+  margin: 0;
+}
+
+/* Local files are portrait phone clips; YouTube embeds letterbox to 16:9. */
+.clip video {
   width: 100%;
   aspect-ratio: 9 / 16;
   display: block;
   border-radius: 14px 14px 14px 0;
   background: var(--deep-900);
   object-fit: cover;
+}
+
+.clip .video-embed {
+  margin-top: 0;
+  border-radius: 14px 14px 14px 0;
+  background: var(--deep-900);
+}
+
+.clip figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* ---------- Cards ---------- */

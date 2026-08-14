@@ -1,0 +1,14 @@
+{
+  "_howToUpdate": [
+    "Upload the clip to YouTube (unlisted works and keeps it out of search).",
+    "Copy the ID from the URL: youtu.be/dQw4w9WgXcQ or watch?v=dQw4w9WgXcQ -> dQw4w9WgXcQ",
+    "Paste it into youtubeId below. The embed replaces the local file automatically.",
+    "Once every clip has an ID, the mp4 files in images/ can be deleted."
+  ],
+
+  "clips": [
+    { "title": "Jake1", "youtubeId": "ngIPsRue6nk" },
+    { "title": "Clip 2", "youtubeId": "", "file": "images/IMG_0829.mp4" },
+    { "title": "Clip 3", "youtubeId": "", "file": "images/IMG_0830.mp4" }
+  ]
+}
