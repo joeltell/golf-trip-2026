@@ -186,11 +186,20 @@ code {
 /* ---------- Hero ---------- */
 
 .hero {
-  margin: 0 0 1.75rem;
+  margin: 0 0 2rem;
+}
+
+/* The rounding and shadow sit on the media itself so a caption can live
+   outside the frame. Works for either a video embed or a still image. */
+.hero .video-embed,
+.hero img {
   border-radius: var(--radius) var(--radius) var(--radius) 0;
-  overflow: hidden;
   box-shadow: var(--shadow);
-  background: var(--deep);
+  background: var(--deep-900);
+}
+
+.hero .video-embed {
+  margin-top: 0;
 }
 
 .hero img {
@@ -199,6 +208,15 @@ code {
   height: clamp(260px, 46vw, 460px);
   object-fit: cover;
   object-position: center 62%;
+}
+
+.hero figcaption {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.6vw, 2.2rem);
+  line-height: 1.15;
+  color: var(--deep);
+  margin-top: 0.9rem;
 }
 
 /* ---------- Clips ---------- */

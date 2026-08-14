@@ -24,13 +24,22 @@ function videoEmbed(raw, title) {
           </div>`;
 }
 
-async function renderClips() {
-  const container = document.getElementById("clips");
-  if (!container) return;
+async function renderHomeVideos() {
+  const heroEl = document.getElementById("hero");
+  const clipsEl = document.getElementById("clips");
+  if (!heroEl && !clipsEl) return;
 
-  const { clips } = await fetch("data/clips.json").then((r) => r.json());
+  const { hero, clips } = await fetch("data/clips.json").then((r) => r.json());
 
-  container.innerHTML = clips
+  if (heroEl && hero) {
+    heroEl.innerHTML = `
+      ${videoEmbed(hero.youtubeId, hero.title)}
+      ${hero.title ? `<figcaption>${escapeHtml(hero.title)}</figcaption>` : ""}`;
+  }
+
+  if (!clipsEl) return;
+
+  clipsEl.innerHTML = clips
     .map((c) => {
       const embed = videoEmbed(c.youtubeId, c.title);
       const local = c.file
@@ -201,19 +210,22 @@ async function renderLeaderboard() {
 }
 
 // Surface failures on the page instead of leaving an empty section behind.
-function guard(render, containerId) {
+// Takes every container the renderer fills, so none of them stay silently blank.
+function guard(render, ...containerIds) {
   render().catch((err) => {
-    console.error(`${containerId} failed to render:`, err);
-    const el = document.getElementById(containerId);
-    if (el) {
-      el.innerHTML = `<p class="note">Couldn't load this section — ${escapeHtml(
-        err.message
-      )}. Check the browser console.</p>`;
+    console.error(`${containerIds.join(" / ")} failed to render:`, err);
+    for (const id of containerIds) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.innerHTML = `<p class="note">Couldn't load this section — ${escapeHtml(
+          err.message
+        )}. Check the browser console.</p>`;
+      }
     }
   });
 }
 
-guard(renderClips, "clips");
+guard(renderHomeVideos, "hero", "clips");
 guard(renderPlayers, "players");
 guard(renderCourses, "courses");
-guard(renderLeaderboard, "scores");
+guard(renderLeaderboard, "scores", "counters");

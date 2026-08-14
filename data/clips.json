@@ -6,6 +6,11 @@
     "Delete that mp4 once the clip has an ID — youtubeId always wins over file."
   ],
 
+  "hero": {
+    "title": "Barsebäck 2026 Aftermovie",
+    "youtubeId": "f1R6eQPmDmg"
+  },
+
   "clips": [
     { "title": "Jacob1", "youtubeId": "ngIPsRue6nk" },
     { "title": "Joel1", "youtubeId": "qjat5kX8VDU" },
