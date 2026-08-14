@@ -200,7 +200,20 @@ async function renderLeaderboard() {
   }
 }
 
-renderClips();
-renderPlayers();
-renderCourses();
-renderLeaderboard();
+// Surface failures on the page instead of leaving an empty section behind.
+function guard(render, containerId) {
+  render().catch((err) => {
+    console.error(`${containerId} failed to render:`, err);
+    const el = document.getElementById(containerId);
+    if (el) {
+      el.innerHTML = `<p class="note">Couldn't load this section — ${escapeHtml(
+        err.message
+      )}. Check the browser console.</p>`;
+    }
+  });
+}
+
+guard(renderClips, "clips");
+guard(renderPlayers, "players");
+guard(renderCourses, "courses");
+guard(renderLeaderboard, "scores");
