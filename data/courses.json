@@ -1,65 +1,85 @@
-[
-  {
-    "name": "Sand GCC",
-    "location": "Jönköping, Sweden",
-    "roundDate": "2026-08-17",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Jönköpings GK",
-    "location": "Jönköping, Sweden",
-    "roundDate": "2026-08-18",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Skinnarebo GCC",
-    "location": "Jönköping, Sweden",
-    "roundDate": "2026-08-18",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Åsundsholm GK",
-    "location": "Ulricehamn, Sweden",
-    "roundDate": "2026-08-19",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Ulricehamn GK",
-    "location": "Ulricehamn, Sweden",
-    "roundDate": "2026-08-19",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Lidköping GK",
-    "location": "Lidköping, Sweden",
-    "roundDate": "2026-08-20",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Skövde GK - Södra banan",
-    "location": "Skövde, Sweden",
-    "roundDate": "2026-08-21",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Vara-Bjärtorp Golfklubb",
-    "location": "Vara, Sweden",
-    "roundDate": "2026-08-21",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  },
-  {
-    "name": "Forsbacka Golfklubb",
-    "location": "Åmål, Sweden",
-    "roundDate": "2026-08-22",
-    "photo": "images/course-placeholder.svg",
-    "holes": []
-  }
-]
+{
+  "_howToUpdate": [
+    "HOLES — add an object to a course's `holes` array once you have a clip:",
+    "  { \"number\": 7, \"par\": 3, \"notes\": \"Water all down the right.\", \"youtubeId\": \"...\" }",
+    "  number is the only required field; par, notes and youtubeId are all optional.",
+    "  youtubeId takes a bare ID or a pasted URL (youtu.be, watch?v=, /shorts/).",
+    "  While `holes` is empty the page shows a few empty slots so you can see where clips will go.",
+    "  Set \"videoSlots\": 4 on a course to change how many empty slots it shows.",
+    "",
+    "REVIEWS — one entry per player, keyed by their name in players.json:",
+    "  \"reviews\": { \"Joel\": { \"condition\": 4, \"fun\": 5, \"thoughts\": \"...\" } }",
+    "  condition and fun are 1-5. thoughts is free text. All three are optional.",
+    "  Course averages and who still owes a review are worked out from these.",
+    "",
+    "PHOTO — point `photo` at a real image in images/ and it shows above the course.",
+    "  Leave it off (or on the placeholder SVG) and no image is rendered at all."
+  ],
+
+  "courses": [
+    {
+      "name": "Sand GCC",
+      "location": "Jönköping, Sweden",
+      "roundDate": "2026-08-17",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Jönköpings GK",
+      "location": "Jönköping, Sweden",
+      "roundDate": "2026-08-18",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Skinnarebo GCC",
+      "location": "Jönköping, Sweden",
+      "roundDate": "2026-08-18",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Åsundsholm GK",
+      "location": "Ulricehamn, Sweden",
+      "roundDate": "2026-08-19",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Ulricehamn GK",
+      "location": "Ulricehamn, Sweden",
+      "roundDate": "2026-08-19",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Lidköping GK",
+      "location": "Lidköping, Sweden",
+      "roundDate": "2026-08-20",
+      "note": "Played twice — inspelsvarv and the score round",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Skövde GK - Södra banan",
+      "location": "Skövde, Sweden",
+      "roundDate": "2026-08-21",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Vara-Bjärtorp Golfklubb",
+      "location": "Vara, Sweden",
+      "roundDate": "2026-08-21",
+      "holes": [],
+      "reviews": {}
+    },
+    {
+      "name": "Forsbacka Golfklubb",
+      "location": "Åmål, Sweden",
+      "roundDate": "2026-08-22",
+      "holes": [],
+      "reviews": {}
+    }
+  ]
+}

@@ -37,8 +37,19 @@ CSS or JSON. It serves the repo folder no matter which directory you run it from
   names any key that matched nobody, so a typo doesn't quietly hide scores.
 - **Home page clips** — edit `data/clips.json`. Each clip takes a `youtubeId`; while
   one is still waiting to be uploaded it can fall back to a local `file` instead.
-- **Courses & holes** — edit `data/courses.json`. Add a course object with a `holes`
-  array; each hole can have a `youtubeId`.
+- **Courses, hole videos & reviews** — edit `data/courses.json` (courses live under a
+  `courses` key). Each course shows a status worked out from `roundDate` — Coming up,
+  Today, or Played — plus its hole clips and reviews.
+  - **Hole clips**: add `{ "number": 7, "par": 3, "notes": "...", "youtubeId": "..." }`
+    to a course's `holes`. Only `number` is required. Until `holes` has anything in it
+    the course shows a few empty slots so you can see where clips will go; set
+    `"videoSlots": 4` to change how many.
+  - **Reviews**: `"reviews": { "Joel": { "condition": 4, "fun": 5, "thoughts": "..." } }`,
+    keyed by name from `players.json` (case-insensitive). Scores are 1–5 and every
+    field is optional. Course averages are calculated from whoever has scored it, and
+    anyone on the roster without a review is listed as still owing one.
+  - **Photo**: point `photo` at an image in `images/` to show it above the course.
+    Leave it out and nothing is rendered — the placeholder SVG is treated as absent.
 
 ## Adding a video
 

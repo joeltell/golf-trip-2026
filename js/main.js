@@ -78,38 +78,216 @@ async function renderPlayers() {
     .join("");
 }
 
+const RATING_MAX = 5;
+const DEFAULT_VIDEO_SLOTS = 3;
+
+function formatRoundDate(iso) {
+  if (!iso) return "";
+  // Midday avoids the date sliding a day either way across time zones.
+  const d = new Date(`${iso}T12:00:00`);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  });
+}
+
+// ISO dates compare correctly as plain strings, which sidesteps time zones.
+function todayIso() {
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
+function roundStatus(iso) {
+  if (!iso) return { label: "Coming up", className: "" };
+  const today = todayIso();
+  if (iso < today) return { label: "Played", className: " played" };
+  if (iso === today) return { label: "Today", className: " today" };
+  return { label: "Coming up", className: "" };
+}
+
+function ratingDots(value) {
+  const filled = Math.round(value);
+  let dots = "";
+  for (let i = 1; i <= RATING_MAX; i += 1) {
+    dots += `<span class="dot${i <= filled ? " on" : ""}"></span>`;
+  }
+  return `<span class="dots" role="img"
+            aria-label="${value.toFixed(1)} out of ${RATING_MAX}">${dots}</span>`;
+}
+
+function average(values) {
+  if (!values.length) return null;
+  return values.reduce((a, b) => a + b, 0) / values.length;
+}
+
+function courseRatings(reviews) {
+  const all = Object.values(reviews);
+  return ["condition", "fun"].map((key) => ({
+    key,
+    label: key === "condition" ? "Condition" : "Fun",
+    value: average(all.map((r) => r[key]).filter((v) => typeof v === "number")),
+  }));
+}
+
+function holeTiles(course) {
+  const title = (hole) => `${course.name} — hole ${hole.number}`;
+
+  if (course.holes?.length) {
+    return course.holes
+      .map((hole) => {
+        const meta = [
+          hole.number != null ? `Hole ${escapeHtml(String(hole.number))}` : null,
+          hole.par != null ? `Par ${escapeHtml(String(hole.par))}` : null,
+        ]
+          .filter(Boolean)
+          .join(" &middot; ");
+        return `
+        <div class="hole">
+          <h4>${meta || "Hole"}</h4>
+          ${
+            videoEmbed(hole.youtubeId, title(hole)) ||
+            `<div class="hole-empty">Clip coming</div>`
+          }
+          ${hole.notes ? `<p>${escapeHtml(hole.notes)}</p>` : ""}
+        </div>`;
+      })
+      .join("");
+  }
+
+  // No holes listed yet — show empty slots so it's obvious where clips land.
+  const slots = course.videoSlots ?? DEFAULT_VIDEO_SLOTS;
+  return Array.from(
+    { length: slots },
+    () => `
+      <div class="hole placeholder">
+        <h4>Hole &mdash;</h4>
+        <div class="hole-empty">Clip after we play it</div>
+      </div>`
+  ).join("");
+}
+
+function reviewBlock(course, roster) {
+  const reviews = course.reviews ?? {};
+  const byName = new Map(
+    Object.entries(reviews).map(([name, r]) => [name.trim().toLowerCase(), r])
+  );
+
+  const written = [];
+  const waiting = [];
+  for (const p of roster) {
+    const r = byName.get(p.name.trim().toLowerCase());
+    if (r) written.push({ name: p.name, ...r });
+    else waiting.push(p.name);
+  }
+
+  if (!written.length) {
+    return `<p class="note">No reviews yet — they land here once we've played it.</p>`;
+  }
+
+  const scoreLine = (r) =>
+    ["condition", "fun"]
+      .filter((k) => typeof r[k] === "number")
+      .map(
+        (k) =>
+          `<span class="review-score">${
+            k === "condition" ? "Condition" : "Fun"
+          } ${r[k]}/${RATING_MAX}</span>`
+      )
+      .join("");
+
+  return `
+    <div class="review-list">
+      ${written
+        .map(
+          (r) => `
+        <div class="review">
+          <div class="review-head">
+            <strong>${escapeHtml(r.name)}</strong>
+            ${scoreLine(r)}
+          </div>
+          ${r.thoughts ? `<p>${escapeHtml(r.thoughts)}</p>` : ""}
+        </div>`
+        )
+        .join("")}
+    </div>
+    ${
+      waiting.length
+        ? `<p class="note">Still owing a review: ${waiting
+            .map((n) => escapeHtml(n))
+            .join(", ")}.</p>`
+        : ""
+    }`;
+}
+
 async function renderCourses() {
   const container = document.getElementById("courses");
   if (!container) return;
 
-  const courses = await fetch("data/courses.json").then((r) => r.json());
+  const [data, roster] = await Promise.all([
+    fetch("data/courses.json").then((r) => r.json()),
+    fetch("data/players.json").then((r) => r.json()),
+  ]);
+  const courses = data.courses ?? [];
 
   container.innerHTML = courses
-    .map(
-      (course) => `
-      <div class="card">
-        <img src="${escapeHtml(course.photo)}" alt="${escapeHtml(course.name)}" class="course-photo">
-        <h2 style="margin-top:0;">${escapeHtml(course.name)}</h2>
-        <p>${escapeHtml(course.location)} &middot; ${escapeHtml(course.roundDate)}</p>
-        <div class="hole-list">
-          ${course.holes
-            .map(
-              (hole) => `
-            <div class="hole">
-              <h4>Hole ${hole.number} &middot; Par ${hole.par}</h4>
-              <p>${escapeHtml(hole.notes)}</p>
-              ${
-                videoEmbed(hole.youtubeId, `${course.name} — hole ${hole.number}`) ||
-                `<p class="note">No video yet</p>`
-              }
-            </div>
-          `
-            )
-            .join("")}
+    .map((course) => {
+      const ratings = courseRatings(course.reviews ?? {});
+      const rated = ratings.filter((r) => r.value !== null);
+      const status = roundStatus(course.roundDate);
+      // The repo ships a placeholder SVG; rendering it nine times added nothing.
+      const photo =
+        course.photo && !course.photo.includes("placeholder")
+          ? `<img src="${escapeHtml(course.photo)}" alt="${escapeHtml(
+              course.name
+            )}" class="course-photo">`
+          : "";
+
+      return `
+      <article class="card course">
+        ${photo}
+        <div class="course-head">
+          <div>
+            <h3 class="course-name">${escapeHtml(course.name)}</h3>
+            <p class="course-meta">
+              ${escapeHtml(course.location)} &middot; ${escapeHtml(
+        formatRoundDate(course.roundDate)
+      )}${course.note ? ` &middot; ${escapeHtml(course.note)}` : ""}
+            </p>
+          </div>
+          <span class="course-status${status.className}">${status.label}</span>
         </div>
-      </div>
-    `
-    )
+
+        ${
+          rated.length
+            ? `<div class="course-ratings">
+                 ${rated
+                   .map(
+                     (r) => `
+                   <div class="rating">
+                     <span class="rating-label">${r.label}</span>
+                     ${ratingDots(r.value)}
+                     <span class="rating-value">${r.value.toFixed(1)}</span>
+                   </div>`
+                   )
+                   .join("")}
+               </div>`
+            : ""
+        }
+
+        <section class="course-section">
+          <h4 class="section-label">Holes on film</h4>
+          <div class="hole-list">${holeTiles(course)}</div>
+        </section>
+
+        <section class="course-section">
+          <h4 class="section-label">Reviews</h4>
+          ${reviewBlock(course, roster)}
+        </section>
+      </article>`;
+    })
     .join("");
 }
 
