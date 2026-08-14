@@ -1,0 +1,49 @@
+{
+  "_howToUpdate": "Put a score in a player's `scores` object under the round id (e.g. \"r4\": 86). Leave it null until played. Totals are summed automatically. Counters are plain numbers — bump them as they happen.",
+
+  "rounds": [
+    { "id": "r1", "day": "Mon 17", "tee": "14:20", "course": "Sand GCC" },
+    { "id": "r2", "day": "Tue 18", "tee": "08:00", "course": "Jönköpings GK" },
+    { "id": "r3", "day": "Tue 18", "tee": "15:00", "course": "Skinnarebo GCC" },
+    { "id": "r4", "day": "Wed 19", "tee": "08:42", "course": "Åsundsholm GK" },
+    { "id": "r5", "day": "Wed 19", "tee": "15:20", "course": "Ulricehamn GK" },
+    { "id": "r6", "day": "Thu 20", "tee": "09:25", "course": "Lidköping GK", "note": "inspelsvarv" },
+    { "id": "r7", "day": "Thu 20", "tee": "15:00", "course": "Lidköping GK", "note": "score round" },
+    { "id": "r8", "day": "Fri 21", "tee": "08:00", "course": "Skövde GK - Södra banan" },
+    { "id": "r9", "day": "Fri 21", "tee": "15:00", "course": "Vara-Bjärtorp Golfklubb" },
+    { "id": "r10", "day": "Sat 22", "tee": "13:20", "course": "Forsbacka Golfklubb" }
+  ],
+
+  "counters": [
+    { "id": "birdies", "label": "Birdies", "icon": "🐦", "title": "One under par on a hole" },
+    { "id": "holeInOnes", "label": "Hole-in-ones", "icon": "⛳", "title": "Tee shot straight in. Drinks are on you." },
+    { "id": "jerrys", "label": "Jerrys", "icon": "🤡", "title": "Awarded by group vote for self-inflicted comedy" }
+  ],
+
+  "players": [
+    {
+      "name": "Joel",
+      "scores": {
+        "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
+        "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
+      },
+      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+    },
+    {
+      "name": "Niklas",
+      "scores": {
+        "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
+        "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
+      },
+      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+    },
+    {
+      "name": "Jacob",
+      "scores": {
+        "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
+        "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
+      },
+      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+    }
+  ]
+}

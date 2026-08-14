@@ -24,71 +24,30 @@
     <div class="card">
       <h2>Leaderboard</h2>
       <p class="note">
-        Update this table after each round (edit the row values below, or add a row per player).
+        Scores and counters live in <code>data/leaderboard.json</code> — edit that one file,
+        totals add themselves up.
       </p>
-      <div class="table-scroll">
-        <table class="leaderboard">
-          <thead>
-            <tr>
-              <th>Player</th>
-              <th><abbr title="Mon 17 — Sand GCC">R1</abbr></th>
-              <th><abbr title="Tue 18 — Jönköpings GK">R2</abbr></th>
-              <th><abbr title="Tue 18 — Skinnarebo GCC">R3</abbr></th>
-              <th><abbr title="Wed 19 — Billingens GK">R4</abbr></th>
-              <th><abbr title="Thu 20 — Lidköping GK, inspelsvarv">R5</abbr></th>
-              <th><abbr title="Thu 20 — Lidköping GK, score round">R6</abbr></th>
-              <th><abbr title="Fri 21 — Skövde GK, Södra banan">R7</abbr></th>
-              <th><abbr title="Fri 21 — Vara-Bjärtorp Golfklubb">R8</abbr></th>
-              <th><abbr title="Sat 22 — Forsbacka Golfklubb">R9</abbr></th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Joel</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>Niklas</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>Jacob</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div class="table-scroll" id="scores"></div>
+    </div>
+
+    <div class="card">
+      <h2>Counters</h2>
+      <p class="note">Running totals for the whole week. Bump the number, then prove it.</p>
+      <div class="table-scroll" id="counters"></div>
+      <ul class="legend">
+        <li><strong>Birdie</strong> — one under par on a hole. Self-reported, grudgingly accepted.</li>
+        <li><strong>Hole-in-one</strong> — if this ever leaves zero, the rest of the site becomes a shrine.</li>
+        <li>
+          <strong>Jerry</strong> — awarded by group vote for self-inflicted comedy: air shots,
+          shanks off the tee box, a ball lost in a place a ball should not be able to reach,
+          any argument with a bunker you lose. Cannot be declined. Cannot be transferred.
+        </li>
+      </ul>
     </div>
   </main>
 
   <footer>Golf Trip 2026 &middot; built for the crew, not for production</footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

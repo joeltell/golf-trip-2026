@@ -175,6 +175,50 @@ a {
   font-size: 0.85rem;
 }
 
+code {
+  font-size: 0.85em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 5px;
+  background: rgba(7, 68, 61, 0.07);
+  color: var(--deep);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  margin: 0 0 1.75rem;
+  border-radius: var(--radius) var(--radius) var(--radius) 0;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--deep);
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 46vw, 460px);
+  object-fit: cover;
+  object-position: center 62%;
+}
+
+/* ---------- Clips ---------- */
+
+.clip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.clip-grid video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  display: block;
+  border-radius: 14px 14px 14px 0;
+  background: var(--deep-900);
+  object-fit: cover;
+}
+
 /* ---------- Cards ---------- */
 
 .card {
@@ -332,6 +376,68 @@ table.leaderboard tr:last-child td {
 
 table.leaderboard tr:nth-child(even) td {
   background: rgba(236, 234, 225, 0.55);
+}
+
+/* ---------- Counters ---------- */
+
+table.counters {
+  min-width: 0;
+}
+
+table.counters th:not(:first-child),
+table.counters td:not(:first-child) {
+  text-align: center;
+}
+
+table.counters td:not(:first-child) {
+  font-size: 1.15rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--deep);
+}
+
+.lead-badge {
+  display: inline-block;
+  min-width: 2rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--deep);
+  font-weight: 500;
+}
+
+.legend {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.legend li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.legend li:last-child {
+  margin-bottom: 0;
+}
+
+.legend li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--lime-dark);
+}
+
+.legend strong {
+  font-weight: 500;
+  color: var(--deep);
 }
 
 /* ---------- Itinerary ---------- */

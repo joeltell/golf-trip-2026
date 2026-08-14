@@ -21,8 +21,15 @@
     "holes": []
   },
   {
-    "name": "Billingens GK",
-    "location": "Skövde, Sweden",
+    "name": "Åsundsholm GK",
+    "location": "Ulricehamn, Sweden",
+    "roundDate": "2026-08-19",
+    "photo": "images/course-placeholder.svg",
+    "holes": []
+  },
+  {
+    "name": "Ulricehamn GK",
+    "location": "Ulricehamn, Sweden",
     "roundDate": "2026-08-19",
     "photo": "images/course-placeholder.svg",
     "holes": []

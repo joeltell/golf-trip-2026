@@ -1,19 +1,19 @@
 [
   {
     "name": "Joel",
-    "photo": "images/player-placeholder.svg",
-    "bio": "Trip organizer. Plays off a self-reported handicap that nobody has ever verified.",
-    "quirk": "Will not stop talking about his new driver."
+    "photo": "images/Joel.JPG",
+    "bio": "Trip organizer. Hates cats — on principle, and Niklas's two in particular. Would honestly rather be raiding in World of Warcraft than walking a fairway.",
+    "quirk": "Booked an 08:42 tee time and has no plan for being conscious at it."
   },
   {
     "name": "Niklas",
-    "photo": "images/player-placeholder.svg",
+    "photo": "images/Niklas.JPG",
     "bio": "Lives out in the countryside with two cats, both of whom have watched more of his practice swings than any human ever will.",
     "quirk": "Insists the fresh country air is worth twenty extra yards."
   },
   {
     "name": "Jacob",
-    "photo": "images/player-placeholder.svg",
+    "photo": "images/Jacob.JPG",
     "bio": "Girl-dad who gets paid to play video games at work, and maintains that this is legitimate training for reading greens.",
     "quirk": "Counts respawning as a free drop."
   }
