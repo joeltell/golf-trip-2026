@@ -1,14 +1,14 @@
 {
   "_howToUpdate": [
     "Upload the clip to YouTube (unlisted works and keeps it out of search).",
-    "Copy the ID from the URL: youtu.be/dQw4w9WgXcQ or watch?v=dQw4w9WgXcQ -> dQw4w9WgXcQ",
-    "Paste it into youtubeId below. The embed replaces the local file automatically.",
-    "Once every clip has an ID, the mp4 files in images/ can be deleted."
+    "Paste the ID or the whole URL into youtubeId — youtu.be/, watch?v= and /shorts/ all work.",
+    "A clip still waiting to be uploaded can play from a local mp4 instead: \"file\": \"images/x.mp4\".",
+    "Delete that mp4 once the clip has an ID — youtubeId always wins over file."
   ],
 
   "clips": [
     { "title": "Jacob1", "youtubeId": "ngIPsRue6nk" },
-    { "title": "Clip 2", "youtubeId": "", "file": "images/IMG_0829.mp4" },
-    { "title": "Clip 3", "youtubeId": "", "file": "images/IMG_0830.mp4" }
+    { "title": "Joel1", "youtubeId": "qjat5kX8VDU" },
+    { "title": "Niklas1", "youtubeId": "JAtTzGYi_LI" }
   ]
 }
