@@ -19,14 +19,22 @@ CSS or JSON. It serves the repo folder no matter which directory you run it from
 ## How to update content
 
 - **Itinerary** — edit `itinerary.html` directly.
+- **Players** — edit `data/players.json`. Add a new `{ "name", "photo", "bio", "quirk" }`
+  object per person. Drop a real photo into `images/` and point `photo` at it
+  (e.g. `images/player-alex.jpg`), or leave the SVG placeholder. Add `"guest": true`
+  for a guest, which marks the card and tags the name on the leaderboard.
+  **This file is the roster** — it decides who appears on the leaderboard too.
 - **Scores & counters** — edit `data/leaderboard.json`. Put a score under the round's
   id (`"r4": 86`) and leave it `null` until played; totals add themselves up and
   unplayed rounds show as `—`. Counters (birdies, hole-in-ones, Jerrys) are plain
   numbers, and whoever leads a column gets a badge. The `rounds` array drives the
   column headers, so adding or removing a round renumbers `R1…Rn` automatically.
-- **Players** — edit `data/players.json`. Add a new `{ "name", "photo", "bio", "quirk" }`
-  object per person. Drop a real photo into `images/` and point `photo` at it
-  (e.g. `images/player-alex.jpg`), or leave the SVG placeholder.
+
+  Keys under `players` are matched to names in `players.json`, ignoring case and
+  stray spaces. Someone with no entry here still gets a row of dashes, so you only
+  add them when there's a score to record. Rename a player in `players.json` and the
+  old key here stops matching — the row follows the new name, and the browser console
+  names any key that matched nobody, so a typo doesn't quietly hide scores.
 - **Home page clips** — edit `data/clips.json`. Each clip takes a `youtubeId`; while
   one is still waiting to be uploaded it can fall back to a local `file` instead.
 - **Courses & holes** — edit `data/courses.json`. Add a course object with a `holes`

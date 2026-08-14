@@ -1,5 +1,11 @@
 {
-  "_howToUpdate": "Put a score in a player's `scores` object under the round id (e.g. \"r4\": 86). Leave it null until played. Totals are summed automatically. Counters are plain numbers — bump them as they happen.",
+  "_howToUpdate": [
+    "Who appears on the leaderboard comes from data/players.json — add, rename or remove people there and both tables follow.",
+    "Scores go under the round id: \"r4\": 86. Leave null until played; totals add up automatically and unplayed rounds show as a dash.",
+    "A player with no entry in `players` below still gets a row of dashes, so filling this in is optional.",
+    "Counters are plain numbers. Whoever leads a column gets a badge; zeroes never do.",
+    "Keys in `players` are matched to names in players.json, ignoring case and surrounding spaces. Rename someone there and the old key here stops matching — the console says which ones didn't match."
+  ],
 
   "rounds": [
     { "id": "r1", "day": "Mon 17", "tee": "14:20", "course": "Sand GCC" },
@@ -20,30 +26,34 @@
     { "id": "jerrys", "label": "Jerrys", "icon": "🤡", "title": "Awarded by group vote for self-inflicted comedy" }
   ],
 
-  "players": [
-    {
-      "name": "Joel",
+  "players": {
+    "Joel": {
       "scores": {
         "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
         "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
       },
       "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
     },
-    {
-      "name": "Niklas",
+    "Niklas": {
       "scores": {
         "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
         "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
       },
       "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
     },
-    {
-      "name": "Jacob",
+    "Jacob": {
+      "scores": {
+        "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
+        "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
+      },
+      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+    },
+    "???": {
       "scores": {
         "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
         "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
       },
       "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
     }
-  ]
+  }
 }

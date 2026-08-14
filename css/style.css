@@ -302,6 +302,32 @@ code {
   margin: 0 0 0.5rem;
 }
 
+.player-card.guest {
+  position: relative;
+  border: 1px dashed var(--lime-dark);
+  background: var(--wash);
+}
+
+.player-card.guest img {
+  border-style: dashed;
+}
+
+.guest-badge {
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: var(--deep);
+  color: var(--lime);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
 .player-card .quirk {
   color: var(--muted);
   font-size: 0.85rem;
@@ -432,6 +458,20 @@ table.counters td:not(:first-child) {
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   color: var(--deep);
+}
+
+.guest-tag {
+  display: inline-block;
+  vertical-align: 0.1em;
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.45rem;
+  border: 1px dashed var(--lime-dark);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .lead-badge {

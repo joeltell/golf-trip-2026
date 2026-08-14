@@ -66,7 +66,8 @@ async function renderPlayers() {
   container.innerHTML = players
     .map(
       (p) => `
-      <div class="card player-card">
+      <div class="card player-card${p.guest ? " guest" : ""}">
+        ${p.guest ? `<span class="guest-badge">Secret guest</span>` : ""}
         <img src="${escapeHtml(p.photo)}" alt="${escapeHtml(p.name)}">
         <h3>${escapeHtml(p.name)}</h3>
         <p>${escapeHtml(p.bio)}</p>
@@ -117,8 +118,40 @@ async function renderLeaderboard() {
   const counterEl = document.getElementById("counters");
   if (!scoreEl && !counterEl) return;
 
-  const data = await fetch("data/leaderboard.json").then((r) => r.json());
-  const { rounds, counters, players } = data;
+  // The roster lives in players.json so names and the guest flag are stated
+  // once; this file only holds each player's numbers, keyed by name.
+  const [board, roster] = await Promise.all([
+    fetch("data/leaderboard.json").then((r) => r.json()),
+    fetch("data/players.json").then((r) => r.json()),
+  ]);
+  const { rounds, counters } = board;
+
+  const entries = new Map(
+    Object.entries(board.players ?? {}).map(([name, data]) => [
+      name.trim().toLowerCase(),
+      data,
+    ])
+  );
+
+  // A player with no entry still gets a row; every cell just reads as unplayed.
+  const players = roster.map((p) => {
+    const entry = entries.get(p.name.trim().toLowerCase());
+    entries.delete(p.name.trim().toLowerCase());
+    return {
+      name: p.name,
+      guest: p.guest,
+      scores: entry?.scores ?? {},
+      counters: entry?.counters ?? {},
+    };
+  });
+
+  // Leftovers mean a key here no longer matches anyone in players.json —
+  // usually a rename or a typo, which would otherwise silently lose scores.
+  for (const stale of entries.keys()) {
+    console.warn(
+      `leaderboard.json has scores for "${stale}", who isn't in players.json`
+    );
+  }
 
   const total = (p) =>
     rounds
@@ -127,6 +160,11 @@ async function renderLeaderboard() {
       .reduce((a, b) => a + b, 0);
 
   const cell = (v) => (typeof v === "number" ? v : "—");
+
+  const nameCell = (p) =>
+    `<td>${escapeHtml(p.name)}${
+      p.guest ? ` <span class="guest-tag">guest</span>` : ""
+    }</td>`;
 
   if (scoreEl) {
     const roundTitle = (r) =>
@@ -152,7 +190,7 @@ async function renderLeaderboard() {
               const t = total(p);
               return `
             <tr>
-              <td>${escapeHtml(p.name)}</td>
+              ${nameCell(p)}
               ${rounds.map((r) => `<td>${cell(p.scores?.[r.id])}</td>`).join("")}
               <td>${t > 0 ? t : "—"}</td>
             </tr>`;
@@ -191,7 +229,7 @@ async function renderLeaderboard() {
             .map(
               (p) => `
             <tr>
-              <td>${escapeHtml(p.name)}</td>
+              ${nameCell(p)}
               ${counters
                 .map((c) => {
                   const v = p.counters?.[c.id] ?? 0;

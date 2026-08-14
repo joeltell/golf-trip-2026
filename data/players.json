@@ -16,5 +16,12 @@
     "photo": "images/Jacob.JPG",
     "bio": "Girl-dad who gets paid to play video games at work, and maintains that this is legitimate training for reading greens.",
     "quirk": "Counts respawning as a free drop."
+  },
+  {
+    "name": "???",
+    "photo": "images/player-placeholder.svg",
+    "bio": "Turns up in slippers, on a knee that has strong opinions about uphill lies, with a swing assembled entirely from YouTube tutorials.",
+    "quirk": "The swing is, infuriatingly, beautiful.",
+    "guest": true
   }
 ]
