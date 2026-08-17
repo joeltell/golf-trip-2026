@@ -1,11 +1,18 @@
 {
   "_howToUpdate": [
-    "HOLES — add an object to a course's `holes` array once you have a clip:",
-    "  { \"number\": 7, \"par\": 3, \"notes\": \"Water all down the right.\", \"youtubeId\": \"...\" }",
-    "  number is the only required field; par, notes and youtubeId are all optional.",
-    "  youtubeId takes a bare ID or a pasted URL (youtu.be, watch?v=, /shorts/).",
-    "  While `holes` is empty the page shows a few empty slots so you can see where clips will go.",
-    "  Set \"videoSlots\": 4 on a course to change how many empty slots it shows.",
+    "VIDEOS — one video per player for the whole round, keyed by their name in players.json:",
+    "  \"videos\": { \"Joel\": \"dQw4w9WgXcQ\" }",
+    "  The value takes a bare ID or a pasted URL (youtu.be, watch?v=, /shorts/).",
+    "  For a title or a note under the video use the long form instead:",
+    "  \"videos\": { \"Joel\": { \"youtubeId\": \"...\", \"title\": \"Joel at Sand GCC\", \"notes\": \"Camera died on 14.\" } }",
+    "  The tile is always headed by the player's name; title captions the video below it.",
+    "  Everyone on the roster gets a tile either way, reading \"Video coming\" until theirs is up.",
+    "  Names are matched ignoring case and surrounding spaces; the console says which ones matched nobody.",
+    "",
+    "VERDICT — the group's overall score for the course, out of 10:",
+    "  \"verdict\": { \"score\": 7, \"thoughts\": \"Worth playing again.\" }",
+    "  Both fields are optional; leave `verdict` off entirely and nothing is shown.",
+    "  This is separate from the per-player reviews below and is never averaged with them.",
     "",
     "REVIEWS — one entry per player, keyed by their name in players.json:",
     "  \"reviews\": { \"Joel\": { \"condition\": 4, \"fun\": 5, \"thoughts\": \"...\" } }",
@@ -21,35 +28,59 @@
       "name": "Sand GCC",
       "location": "Jönköping, Sweden",
       "roundDate": "2026-08-17",
-      "holes": [],
-      "reviews": {}
+      "verdict": {
+        "score": 7,
+        "thoughts": "Handsome course in good nick, and the front nine is a pleasure. The back nine has teeth and there's water waiting everywhere you don't want it. Worth playing again, ideally with a calmer group."
+      },
+      "videos": {
+        "Joel": {
+          "youtubeId": "https://youtu.be/eJ7FaqIWDYA",
+          "title": "Joel front nine at Sand GCC"
+        },
+        "Niklas": {
+          "youtubeId": "https://youtu.be/-wKIlcMtlPY",
+          "title": "Niklas front nine at Sand GCC"
+        }
+      },
+      "reviews": {
+        "Joel": {
+          "condition": 4,
+          "fun": 3,
+          "thoughts": "The first nine was genuinely fun. Then the back nine happened, I lost my temper and threw the clubs in the water, so that's where the recording stops."
+        },
+        "Niklas": {
+          "condition": 4,
+          "fun": 3,
+          "thoughts": "Loved the place right up until it started raining cats and dogs — and every umbrella we own was sitting in the car."
+        }
+      }
     },
     {
       "name": "Jönköpings GK",
       "location": "Jönköping, Sweden",
       "roundDate": "2026-08-18",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     },
     {
       "name": "Skinnarebo GCC",
       "location": "Jönköping, Sweden",
       "roundDate": "2026-08-18",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     },
     {
       "name": "Åsundsholm GK",
       "location": "Ulricehamn, Sweden",
       "roundDate": "2026-08-19",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     },
     {
       "name": "Ulricehamn GK",
       "location": "Ulricehamn, Sweden",
       "roundDate": "2026-08-19",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     },
     {
@@ -57,28 +88,28 @@
       "location": "Lidköping, Sweden",
       "roundDate": "2026-08-20",
       "note": "Played twice — inspelsvarv and the score round",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     },
     {
       "name": "Skövde GK - Södra banan",
       "location": "Skövde, Sweden",
       "roundDate": "2026-08-21",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     },
     {
       "name": "Vara-Bjärtorp Golfklubb",
       "location": "Vara, Sweden",
       "roundDate": "2026-08-21",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     },
     {
       "name": "Forsbacka Golfklubb",
       "location": "Åmål, Sweden",
       "roundDate": "2026-08-22",
-      "holes": [],
+      "videos": {},
       "reviews": {}
     }
   ]

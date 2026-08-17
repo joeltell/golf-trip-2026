@@ -79,7 +79,7 @@ async function renderPlayers() {
 }
 
 const RATING_MAX = 5;
-const DEFAULT_VIDEO_SLOTS = 3;
+const VERDICT_MAX = 10;
 
 function formatRoundDate(iso) {
   if (!iso) return "";
@@ -123,6 +123,25 @@ function average(values) {
   return values.reduce((a, b) => a + b, 0) / values.length;
 }
 
+// The group's overall take on the course, out of 10. Deliberately kept apart from
+// the per-player 1-5 reviews — it's one verdict, not an average of them.
+function verdictBlock(verdict) {
+  if (!verdict) return "";
+  const score = typeof verdict.score === "number" ? verdict.score : null;
+  if (score === null && !verdict.thoughts) return "";
+
+  return `
+    <div class="course-verdict">
+      ${
+        score !== null
+          ? `<span class="verdict-score">${escapeHtml(String(score))}<span
+               class="verdict-max">/${VERDICT_MAX}</span></span>`
+          : ""
+      }
+      ${verdict.thoughts ? `<p>${escapeHtml(verdict.thoughts)}</p>` : ""}
+    </div>`;
+}
+
 function courseRatings(reviews) {
   const all = Object.values(reviews);
   return ["condition", "fun"].map((key) => ({
@@ -132,41 +151,49 @@ function courseRatings(reviews) {
   }));
 }
 
-function holeTiles(course) {
-  const title = (hole) => `${course.name} — hole ${hole.number}`;
+// One video per player for the whole round, keyed by their name in players.json
+// and matched the same case-insensitive way reviews are. The roster decides how
+// many tiles there are, so everyone has a visible slot before they've uploaded.
+function playerVideoTiles(course, roster) {
+  const byName = new Map(
+    Object.entries(course.videos ?? {}).map(([name, v]) => [
+      name.trim().toLowerCase(),
+      typeof v === "string" ? { youtubeId: v } : v ?? {},
+    ])
+  );
 
-  if (course.holes?.length) {
-    return course.holes
-      .map((hole) => {
-        const meta = [
-          hole.number != null ? `Hole ${escapeHtml(String(hole.number))}` : null,
-          hole.par != null ? `Par ${escapeHtml(String(hole.par))}` : null,
-        ]
-          .filter(Boolean)
-          .join(" &middot; ");
-        return `
-        <div class="hole">
-          <h4>${meta || "Hole"}</h4>
-          ${
-            videoEmbed(hole.youtubeId, title(hole)) ||
-            `<div class="hole-empty">Clip coming</div>`
-          }
-          ${hole.notes ? `<p>${escapeHtml(hole.notes)}</p>` : ""}
-        </div>`;
-      })
-      .join("");
+  const tiles = roster
+    .map((p) => {
+      const key = p.name.trim().toLowerCase();
+      const video = byName.get(key) ?? {};
+      byName.delete(key);
+      // The tile heading stays the player's name so the grid reads consistently;
+      // an optional title captions the video, the way home page clips do.
+      const label = video.title || `${course.name} — ${p.name}`;
+      const embed = videoEmbed(video.youtubeId, label);
+      return `
+      <figure class="round-video${embed ? "" : " placeholder"}">
+        <h4>${escapeHtml(p.name)}</h4>
+        ${embed || `<div class="round-video-empty">Video coming</div>`}
+        ${
+          embed && video.title
+            ? `<figcaption>${escapeHtml(video.title)}</figcaption>`
+            : ""
+        }
+        ${video.notes ? `<p>${escapeHtml(video.notes)}</p>` : ""}
+      </figure>`;
+    })
+    .join("");
+
+  // A leftover key means it matched nobody on the roster — usually a rename or
+  // a typo, which would otherwise silently hide a video that is already up.
+  for (const stale of byName.keys()) {
+    console.warn(
+      `courses.json has a ${course.name} video for "${stale}", who isn't in players.json`
+    );
   }
 
-  // No holes listed yet — show empty slots so it's obvious where clips land.
-  const slots = course.videoSlots ?? DEFAULT_VIDEO_SLOTS;
-  return Array.from(
-    { length: slots },
-    () => `
-      <div class="hole placeholder">
-        <h4>Hole &mdash;</h4>
-        <div class="hole-empty">Clip after we play it</div>
-      </div>`
-  ).join("");
+  return tiles;
 }
 
 function reviewBlock(course, roster) {
@@ -260,6 +287,8 @@ async function renderCourses() {
           <span class="course-status${status.className}">${status.label}</span>
         </div>
 
+        ${verdictBlock(course.verdict)}
+
         ${
           rated.length
             ? `<div class="course-ratings">
@@ -278,8 +307,8 @@ async function renderCourses() {
         }
 
         <section class="course-section">
-          <h4 class="section-label">Holes on film</h4>
-          <div class="hole-list">${holeTiles(course)}</div>
+          <h4 class="section-label">The round on film</h4>
+          <div class="round-video-list">${playerVideoTiles(course, roster)}</div>
         </section>
 
         <section class="course-section">

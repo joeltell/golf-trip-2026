@@ -37,13 +37,18 @@ CSS or JSON. It serves the repo folder no matter which directory you run it from
   names any key that matched nobody, so a typo doesn't quietly hide scores.
 - **Home page clips** — edit `data/clips.json`. Each clip takes a `youtubeId`; while
   one is still waiting to be uploaded it can fall back to a local `file` instead.
-- **Courses, hole videos & reviews** — edit `data/courses.json` (courses live under a
+- **Courses, round videos & reviews** — edit `data/courses.json` (courses live under a
   `courses` key). Each course shows a status worked out from `roundDate` — Coming up,
-  Today, or Played — plus its hole clips and reviews.
-  - **Hole clips**: add `{ "number": 7, "par": 3, "notes": "...", "youtubeId": "..." }`
-    to a course's `holes`. Only `number` is required. Until `holes` has anything in it
-    the course shows a few empty slots so you can see where clips will go; set
-    `"videoSlots": 4` to change how many.
+  Today, or Played — plus one video per player and the reviews.
+  - **Round videos**: one video per player covering the whole round, keyed by name from
+    `players.json` (case-insensitive): `"videos": { "Joel": "dQw4w9WgXcQ" }`. Use the long
+    form `{ "youtubeId": "...", "title": "...", "notes": "..." }` when you want a caption
+    or a note under it — the tile is headed by the player's name either way. Everyone on the roster
+    gets a tile whether or not their video is up, so the gaps are visible; a key matching
+    nobody is named in the browser console.
+  - **Verdict**: `"verdict": { "score": 7, "thoughts": "..." }` — the group's overall
+    score for the course out of 10, shown above the individual reviews. Both fields are
+    optional, and it's kept separate from the per-player scores rather than averaged in.
   - **Reviews**: `"reviews": { "Joel": { "condition": 4, "fun": 5, "thoughts": "..." } }`,
     keyed by name from `players.json` (case-insensitive). Scores are 1–5 and every
     field is optional. Course averages are calculated from whoever has scored it, and
@@ -58,8 +63,8 @@ CSS or JSON. It serves the repo folder no matter which directory you run it from
    with the link (or the embed) can watch.
 2. Copy either the ID or the whole URL — `youtu.be/…`, `watch?v=…` and `/shorts/…` all
    work, the ID gets parsed out.
-3. Paste it into `youtubeId`: `data/clips.json` for a home page clip, or the matching
-   hole in `data/courses.json`.
+3. Paste it into `youtubeId`: `data/clips.json` for a home page clip, or under your name
+   in the round's `videos` in `data/courses.json`.
 
 Don't commit video files to this repo — GitHub has a 100MB per-file limit and git
 handles large binaries badly. YouTube (or Google Drive if you prefer) is the
