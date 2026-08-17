@@ -29,17 +29,17 @@
   "players": {
     "Joel": {
       "scores": {
-        "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
+        "r1": 92, "r2": null, "r3": null, "r4": null, "r5": null,
         "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
       },
-      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+      "counters": { "birdies": 2, "holeInOnes": 0, "jerrys": 1 }
     },
     "Niklas": {
       "scores": {
-        "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
+        "r1": 80, "r2": null, "r3": null, "r4": null, "r5": null,
         "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
       },
-      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 1 }
     },
     "Jacob": {
       "scores": {
