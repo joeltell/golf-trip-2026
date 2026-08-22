@@ -14,7 +14,7 @@
     { "id": "r4", "day": "Wed 19", "tee": "08:42", "course": "Åsundsholm GK" },
     { "id": "r5", "day": "Wed 19", "tee": "15:20", "course": "Ulricehamn GK" },
     { "id": "r6", "day": "Thu 20", "tee": "09:25", "course": "Lidköping GK", "note": "inspelsvarv" },
-    { "id": "r7", "day": "Thu 20", "tee": "15:00", "course": "Lidköping GK", "note": "score round" },
+    { "id": "r7", "day": "Thu 20", "tee": "15:00", "course": "Lidköping GK", "note": "score round, cancelled — extreme weather" },
     { "id": "r8", "day": "Fri 21", "tee": "08:00", "course": "Skövde GK - Södra banan" },
     { "id": "r9", "day": "Fri 21", "tee": "15:00", "course": "Vara-Bjärtorp Golfklubb" },
     { "id": "r10", "day": "Sat 22", "tee": "13:20", "course": "Forsbacka Golfklubb" }
@@ -29,31 +29,31 @@
   "players": {
     "Joel": {
       "scores": {
-        "r1": 92, "r2": 88, "r3": 79, "r4": null, "r5": null,
-        "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
+        "r1": 92, "r2": 88, "r3": 79, "r4": 89, "r5": 94,
+        "r6": 81, "r7": null, "r8": 85, "r9": 96, "r10": null
       },
-      "counters": { "birdies": 3, "holeInOnes": 0, "jerrys": 2 }
+      "counters": { "birdies": 4, "holeInOnes": 0, "jerrys": 2 }
     },
     "Niklas": {
       "scores": {
-        "r1": 80, "r2": 91, "r3": 82, "r4": null, "r5": null,
-        "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
+        "r1": 80, "r2": 91, "r3": 82, "r4": 85, "r5": 88,
+        "r6": 78, "r7": null, "r8": 95, "r9": 78, "r10": null
       },
-      "counters": { "birdies": 2, "holeInOnes": 0, "jerrys": 2 }
+      "counters": { "birdies": 3, "holeInOnes": 0, "jerrys": 2 }
     },
     "Jacob": {
       "scores": {
         "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
-        "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
+        "r6": 94, "r7": null, "r8": 97, "r9": 92, "r10": null
       },
-      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+      "counters": { "birdies": 1, "holeInOnes": 0, "jerrys": 0 }
     },
-    "???": {
+    "Affe": {
       "scores": {
-        "r1": null, "r2": null, "r3": null, "r4": null, "r5": null,
+        "r1": null, "r2": null, "r3": null, "r4": 84, "r5": null,
         "r6": null, "r7": null, "r8": null, "r9": null, "r10": null
       },
-      "counters": { "birdies": 0, "holeInOnes": 0, "jerrys": 0 }
+      "counters": { "birdies": 2, "holeInOnes": 0, "jerrys": 0 }
     }
   }
 }
